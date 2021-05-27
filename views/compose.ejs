@@ -5,16 +5,29 @@
 
 <form class="" action="/compose" method="post">
   <div class="forme-group">
+
     <label>Title</label>
     <input class="form-control" type="text" name="postTitle">
+
     <br>
+
+    <label for="authors">Author: </label>
+    <select class="authors-select" name="postAuthor">
+      <option value="nolan">Nolan</option>
+      <option value="stephane">Stephane</option>
+      <option value="ruchi">Ruchi</option>
+    </select>
+
+    <label for="log-date">Date:</label>
+    <input type="date" name="postDate">
+    <br>
+
     <label>Post</label>
     <textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
+
     <br>
+
     <button class="btn btn-primary" type="submit" name="button">Publish</button>
   </div>
 
 </form>
-
-
-<%- include("partials/footer"); -%>

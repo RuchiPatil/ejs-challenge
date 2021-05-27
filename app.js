@@ -23,15 +23,34 @@ mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true, use
 
 const postSchema = {
   title: String,
+  author: String,
+  date: String,
   content: String
 };
 
 const Post = mongoose.model("Post", postSchema);
 
+var findAuthor;
+var findDate;
+
+app.post("/", function(req, res){
+  findAuthor = req.body.selectedAuthor;
+  findDate = req.body.selectedDate;
+  res.redirect("/");
+  console.log(findAuthor + " and " + findDate);
+  /*Post.find({author: findAuthor}, function(err, posts){
+    res.render("home", {
+      startingContent,
+      posts: posts
+    });
+  });*/
+});
 
 //GET REQUESTS
 app.get("/", function(req, res) {
-  Post.find({}, function(err, posts){
+  //const findAuthor = req.params.selectedAuthor;
+
+  Post.find({author: findAuthor}, function(err, posts){
     res.render("home", {
       startingContent: homeStartingContent,
       posts: posts
@@ -48,6 +67,8 @@ app.get("/compose", function(req, res) {
 app.post("/compose", function(req, res) {
   const post = new Post ({
     title: req.body.postTitle,
+    author: req.body.postAuthor,
+    date: req.body.postDate,
     content: req.body.postBody
   });
 
@@ -67,6 +88,8 @@ app.get("/posts/:postId", function(req, res){
   Post.findOne({_id:requestedPostId}, function(err, post){
     res.render("post", {
       title: post.title,
+      author: post.author,
+      date: post.date,
       content: post.content
     });
   });

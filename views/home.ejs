@@ -1,14 +1,35 @@
 
 <%- include("partials/header"); -%>
-<h1>Home</h1>
+<div class="title-card">
+  <h1>Home</h1>
+  <p> <%= startingContent %> </p>
+</div>
 
-<p> <%= startingContent %> </p>
+<div class="post-showcase">
 
-<% posts.forEach(function(post){ %>
-<h1><%=   post.title  %></h1>
-<p><%= post.content.substring(0, 80) + "..." %> </p>
-<a href="/posts/<%= post._id %>">Read More</a>
-<% }); %>
+  <form class="" action="/" method="post">
+    <div class="post-search">
+      <label for="search-post">Search by: </label>
+
+      <label for="post-author">Author</label>
+      <select class="author-select" name="selectedAuthor">
+        <option value="">all</option>
+        <option value="nolan">Nolan</option>
+        <option value="stephane">Stephane</option>
+        <option value="ruchi">Ruchi</option>
+      </select>
+
+      <label for="log-date">Date:</label>
+      <input type="date" name="selectedDate">
+
+      <button class="btn btn-primary" type="submit" name="button">Search</button>
+    </div>
+  </form>
 
 
-<%- include("partials/footer"); -%>
+  <% posts.forEach(function(post){ %>
+  <h1><%=   post.title  %></h1>
+  <p><%= post.content.substring(0, 80) + "..." %> </p>
+  <a href="/posts/<%= post._id %>">Read More</a>
+  <% }); %>
+</div>
